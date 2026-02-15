@@ -47,7 +47,7 @@ export default function CellLineBrowser({ filter, pairedOnly, tissues, onBack }:
   const { columns: termCols, rows: termRows } = useTerminalSize();
   const pageSize = Math.max(8, termRows - 14);
   const detailPageSize = Math.max(6, termRows - 20);
-  const sepWidth = Math.min(92, termCols - 6);
+  const sepWidth = Math.min(200, termCols - 6);
 
   useEffect(() => {
     call('list_cell_lines');
@@ -427,13 +427,13 @@ export default function CellLineBrowser({ filter, pairedOnly, tissues, onBack }:
         {/* Header */}
         <Box>
           <Text color={theme.blue} bold>{padR('', 5)}</Text>
-          <Text color={theme.blue} bold>{padR('Cell Line', 20)}</Text>
+          <Text color={theme.blue} bold>{padR('Cell Line', 80)}</Text>
           <Text color={theme.blue} bold>{padR('Species', 8)}</Text>
-          <Text color={theme.blue} bold>{padR('Tissue', 20)}</Text>
+          <Text color={theme.blue} bold>{padR('Tissue', 50)}</Text>
           <Text color={theme.blue} bold>{padR('Reps', 5)}</Text>
           <Text color={theme.blue} bold>{padR('Size', 10)}</Text>
           <Text color={theme.blue} bold>{padR('cCRE', 5)}</Text>
-          <Text color={theme.blue} bold>{padR('Asm', 8)}</Text>
+          <Text color={theme.blue} bold>{padR('Asm', 15)}</Text>
           <Text color={theme.blue} bold>{padR('Tx', 4)}</Text>
           <Text color={theme.blue} bold>ML</Text>
         </Box>
@@ -459,16 +459,16 @@ export default function CellLineBrowser({ filter, pairedOnly, tissues, onBack }:
                 <Text color={isCursor ? theme.accent : theme.muted}>{isCursor ? icons.arrow : ' '} </Text>
                 <Text color={isChecked ? theme.green : theme.muted}>{isChecked ? icons.check : icons.circle} </Text>
                 <Text color={isCursor ? theme.white : theme.fg} bold={isCursor}>
-                  {padR(cl.cell_line || '', 20)}
+                  {padR(cl.cell_line || '', 80)}
                 </Text>
                 <Text color={spColor}>{padR(sp, 8)}</Text>
-                <Text color={theme.muted}>{padR(cl.tissue || 'Unknown', 20)}</Text>
+                <Text color={theme.muted}>{padR(cl.tissue || 'Unknown', 50)}</Text>
                 <Text color={theme.orange}>{padR(String(cl.replicates || 0), 5)}</Text>
                 <Text color={theme.cyan}>{padR(gbFormat(cl.total_gb || 0), 10)}</Text>
                 <Text color={cl.has_ccre ? theme.success : theme.error}>
                   {padR(cl.has_ccre ? icons.check : icons.cross, 5)}
                 </Text>
-                <Text color={theme.muted}>{padR(cl.genome_assembly || '?', 8)}</Text>
+                <Text color={theme.muted}>{padR(cl.genome_assembly || '?', 15)}</Text>
                 <Text color={txCount > 0 ? theme.warning : theme.muted}>{padR(txCount > 0 ? String(txCount) : '--', 4)}</Text>
                 <Text color={mlColor}>{mlStatus}</Text>
               </Box>
